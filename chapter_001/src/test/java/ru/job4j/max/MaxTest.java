@@ -18,4 +18,19 @@ public class MaxTest {
         int result = maxim.max(200, 2);
         assertThat(result, is(200));
     }
+
+    @Test
+    public void whenFirstLessThanSecondAndThirdThenThird() {
+        Max maximum = new Max();
+        int result = maximum.max(0, 1, 150);
+        assertThat(result, is(150));
+    }
+
+    @Test
+    public void whenThirdLessThanSecondAndFirstThenFirst() {
+        Max maximum = new Max();
+        int result = maximum.max(1010, 1, 150);
+        assertThat(result, is(1010));
+    }
+
 }
