@@ -66,6 +66,7 @@ public class Triangle {
      * @return - истина, если это треугольник, ложь - если нет
      */
     private boolean exist(double ab, double ac, double bc) {
+
         return ab + ac > bc && ab + bc > ac && bc + ac > ab;
     }
 
