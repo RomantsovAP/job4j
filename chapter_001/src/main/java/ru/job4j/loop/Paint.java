@@ -64,6 +64,12 @@ public class Paint {
         return screen.toString();
     }
 
+    /**
+     * Метод рисует пирамиду заданной высоты в псевдографике
+     * это мой вариант решения, надеюсь не помешает проверке.
+     * @param height - высота пирамиды
+     * @return - строку с рисунком пирамиды в псевдографике
+     */
     public String pyramid2(int height) {
         StringBuilder screen = new StringBuilder();
         StringBuilder line = new StringBuilder(); //основание пирамиды
