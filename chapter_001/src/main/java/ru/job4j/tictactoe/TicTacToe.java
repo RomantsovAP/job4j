@@ -16,12 +16,25 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
+/**
+ * Игра крестики-нолики
+ * @author Petr Arsentev
+ * @version 1.0.0.0
+ * @since 24.04.18
+ */
 public class TicTacToe extends Application {
     private static final String JOB4J = "Крестики-нолики www.job4j.ru";
     private final int size = 3;
     private final Figure3T[][] cells = new Figure3T[size][size];
     private final Logic3T logic = new Logic3T(cells);
 
+    /**
+     * рисуем белый квадрат с черными границами
+     * @param x - координата X, 1,2,3
+     * @param y - координата Y, 1,2,3
+     * @param size - размер стороны квадрата в пикселах
+     * @return - полученный квадрат
+     */
     private Figure3T buildRectangle(int x, int y, int size) {
         Figure3T rect = new Figure3T();
         rect.setX(x * size);
@@ -33,6 +46,13 @@ public class TicTacToe extends Application {
         return rect;
     }
 
+    /**
+     * Рисуем нолик в клетке поля
+     * @param x - координата X, 1,2,3
+     * @param y - координата Y, 1,2,3
+     * @param size - максимальный диаметр нолика
+     * @return - группу, содержающую ровно 1 нолик
+     */
     private Group buildMarkO(double x, double y, int size) {
         Group group = new Group();
         int radius = size / 2;
@@ -43,6 +63,10 @@ public class TicTacToe extends Application {
         return group;
     }
 
+    /**
+     * Сообщение пользователю
+     * @param message - текст сообщения
+     */
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(JOB4J);
@@ -51,6 +75,10 @@ public class TicTacToe extends Application {
         alert.showAndWait();
     }
 
+    /**
+     * Проверяет есть ли свободные клетки для хода
+     * @return - есть ли свободные клетки для хода
+     */
     private boolean checkState() {
         boolean gap = this.logic.hasGap();
         if (!gap) {
@@ -59,6 +87,9 @@ public class TicTacToe extends Application {
         return gap;
     }
 
+    /**
+     * Оповещает пользователя о выигрыше
+     */
     private void checkWinner() {
         if (this.logic.isWinnerX()) {
             this.showAlert("Победили Крестики! Начните новую Игру!");
@@ -67,6 +98,21 @@ public class TicTacToe extends Application {
         }
     }
 
+    /**
+     * Проверяет не закончилась ли игра победой одного из игроков
+     * @return - есть победитель
+     */
+    private boolean weHaveAWinner() {
+        return this.logic.isWinnerO() || this.logic.isWinnerX();
+    }
+
+    /**
+     * Строит крестик в ячейке
+     * @param x - координата X, 1,2,3
+     * @param y - координата Y, 1,2,3
+     * @param size - максимальный размер крестика
+     * @return - группу с единственным крестиком внутри
+     */
     private Group buildMarkX(double x, double y, int size) {
         Group group = new Group();
         group.getChildren().addAll(
@@ -82,10 +128,17 @@ public class TicTacToe extends Application {
         return group;
     }
 
+    /**
+     * Обработчик события для игрового поля.
+     * проверяет возможен ли следующий ход, если возможен - размещает очередной крестик или нолик
+     * на игровом поле в ячейке на которую нажали левой или правой кнопкой мыши
+     * @param panel - панель основной формы
+     * @return событие мыши
+     */
     private EventHandler<MouseEvent> buildMouseEvent(Group panel) {
         return event -> {
             Figure3T rect = (Figure3T) event.getTarget();
-            if (this.checkState()) {
+            if (this.checkState() && !rect.hasMarkX() && !rect.hasMarkO() && !weHaveAWinner()) {
                 if (event.getButton() == MouseButton.PRIMARY) {
                     rect.take(true);
                     panel.getChildren().add(
@@ -97,12 +150,16 @@ public class TicTacToe extends Application {
                             this.buildMarkO(rect.getX(), rect.getY(), 50)
                     );
                 }
-                this.checkState();
                 this.checkWinner();
+                this.checkState();
             }
         };
     }
 
+    /**
+     * Строит сетку игрового поля, к каждой клетке добавляет обработчик события мыши
+     * @return подготовленное игровое поле
+     */
     private Group buildGrid() {
         Group panel = new Group();
         for (int y = 0; y != this.size; y++) {
@@ -116,7 +173,10 @@ public class TicTacToe extends Application {
         return panel;
     }
 
-
+    /**
+     * Начало игры
+     * @param stage - окно приложения
+     */
     @Override
     public void start(Stage stage) {
         BorderPane border = new BorderPane();

@@ -1,5 +1,11 @@
 package ru.job4j.tictactoe;
 
+/**
+ * Класс с логикой игры в крестики-нолики
+ * @author AlekseyRomantsov
+ * @version 1.0.0.0
+ * @since 24.04.2018
+ */
 public class Logic3T {
     private final Figure3T[][] table;
 
@@ -44,14 +50,27 @@ public class Logic3T {
         }
         return result;
     }
+
+    /**
+     * Победили крестики
+     * @return - true, если победили крестики, false - если нет
+     */
     public boolean isWinnerX() {
         return isWinner(1);
     }
 
+    /**
+     * Победили нолики
+     * @return - true, если победили нолики, false - если нет
+     */
     public boolean isWinnerO() {
         return isWinner(2);
     }
 
+    /**
+     * Определяет, есть ли свободные клетки для хода
+     * @return - можно kb ходить дальше
+     */
     public boolean hasGap() {
         boolean result = false;
         for (int i = 0; i < table.length; i++) {
