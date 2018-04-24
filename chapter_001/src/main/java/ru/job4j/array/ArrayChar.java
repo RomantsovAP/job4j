@@ -19,15 +19,10 @@ public class ArrayChar {
      * @return если слово начинаеться с префикса
      */
     public boolean startWith(String prefix) {
-        boolean result = true;
-        if (prefix.length() > data.length) {
-            result = false;
-        } else {
-            for (int i = 0; i < prefix.length(); i++) {
-                if (data[i] != prefix.charAt(i)) {
-                    result = false;
-                    break;
-                }
+        boolean result = prefix.length() <= data.length;
+        for (int i = 0; i < prefix.length() && result; i++) {
+            if (data[i] != prefix.charAt(i)) {
+                result = false;
             }
         }
         return result;
