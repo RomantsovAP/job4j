@@ -14,13 +14,7 @@ public class Logic3T {
     }
 
     private boolean hasMark(Figure3T figure3T, int mark) {
-        boolean result;
-        if (mark == 1) {
-            result = figure3T.hasMarkX();
-        } else {
-            result = figure3T.hasMarkO();
-        }
-        return result;
+        return (mark == 1) ? figure3T.hasMarkX() : figure3T.hasMarkO();
     }
 
     private boolean isWinner(int mark) {

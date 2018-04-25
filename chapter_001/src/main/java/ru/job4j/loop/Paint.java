@@ -58,19 +58,17 @@ public class Paint {
      */
     public String pyramid2(int height) {
         StringBuilder screen = new StringBuilder();
-        StringBuilder line = new StringBuilder(); //основание пирамиды
+        StringBuilder line = new StringBuilder();
         int weight = 2 * height - 1;
         for (int i = 0; i < weight; i++) {
             line.append('^');
         }
         screen.append(line.toString() + System.lineSeparator());
-
         for (int i = 1; i < height; i++) {
-            line.replace(i - 1, i, " "); // заменим i-ый на пробел
+            line.replace(i - 1, i, " ");
             line.reverse();
-            line.replace(i - 1, i, " "); // заменим i-ый c конца на пробел
+            line.replace(i - 1, i, " ");
             screen.insert(0, line.toString() + System.lineSeparator());
-
         }
         return screen.toString();
     }

@@ -14,15 +14,14 @@ public class Board {
      * @return - тект с шахматной доской
      */
     public String paint(int width, int height) {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < height; i++) {
-
             for (int j = 0; j < width; j++) {
-                sb.append((j % 2 == i % 2) ? 'X' : ' ');
+                result.append((j % 2 == i % 2) ? 'X' : ' ');
             }
-            sb.append(System.lineSeparator());
+            result.append(System.lineSeparator());
         }
-        return sb.toString();
+        return result.toString();
     }
 
 }
