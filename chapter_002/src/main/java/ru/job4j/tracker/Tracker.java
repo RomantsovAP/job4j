@@ -18,6 +18,7 @@ public class Tracker {
      */
     private int position = 0;
 
+
     /**
      * Метод реализаущий добавление заявки в хранилище
      * @param item новая заявка
@@ -106,7 +107,7 @@ public class Tracker {
      * @return - найденная задача
      */
     public Item findById(String id) {
-        Item result = null;
+        Item result = NULL_ITEM;
         for (int i = 0; i < position; i++) {
             if (this.items[i].getId().equals(id)) {
                 result = items[i];
