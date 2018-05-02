@@ -115,7 +115,7 @@ public class StartUI {
     private void deleteItem() {
         String id = this.input.ask("Введите id заявки для удаления");
         Item foundItem = tracker.findById(id);
-        if (foundItem != null) {
+        if (foundItem != Tracker.NULL_ITEM) {
             String confirmation = this.input.ask("Будет удалена заявка " + foundItem.toString() + " , вы уверены? (y/n)");
             if ("y".equals(confirmation)) {
                 tracker.delete(id);
