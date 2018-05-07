@@ -31,12 +31,19 @@ public class MenuTracker {
         actions[6] = new ExitMenu();
     }
 
+    private int[] fillMenuRange() {
+        int[] range = new int[actions.length];
+        for (int i = 0; i < range.length; i++) {
+            range[i] = actions[i].key();
+        }
+        return range;
+    }
+
 
     public void run() {
         while (!exit) {
             this.showMenu();
-            String answer = this.input.ask("Введите пункт меню : ");
-            int numberOfAction = Integer.valueOf(answer);
+            int numberOfAction = this.input.ask("Введите пункт меню : ", fillMenuRange());
             actions[numberOfAction].execute(input, tracker);
         }
     }
