@@ -23,7 +23,7 @@ public class ConsoleInput implements Input {
             }
         }
         if (!isNormAnsw) {
-            throw new MenuOutException("Menu out exception");
+            throw new MenuOutException("Menu out exception ");
         }
         return answ;
     }
