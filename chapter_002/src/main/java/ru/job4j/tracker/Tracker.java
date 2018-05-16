@@ -3,6 +3,12 @@ package ru.job4j.tracker;
 import java.util.Arrays;
 import java.util.Random;
 
+/**
+ * Задачник, содержит список элементов-задач и основные действия с ним
+ * @author AlekseyRomantsov
+ * @version 1.0.0.0
+ * @since 16.05.2018
+  */
 public class Tracker {
 
     public static final Item NULL_ITEM = new Item();

@@ -1,9 +1,16 @@
 package ru.job4j.tracker;
 
+/**
+ * Пункт меню
+ * @author AlekseyRomantsov
+ * @version 1.0.0.0
+ * @since 16.05.2018
+ */
 public class Item {
     private String id;
     private String name;
     private String desk;
+
 
     public String getId() {
         return id;

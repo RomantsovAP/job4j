@@ -35,6 +35,12 @@ public class StubInput implements Input {
         return this.value[this.position++];
     }
 
+    /**
+     * Эмуляция запроса числового значения у пользователя
+     * @param question - строка с вопросом
+     * @param range - перечень допустимых значений
+     * @return число-ответ пользователя
+     */
     @Override
     public int ask(String question, int[] range) {
         return Integer.parseInt(this.value[this.position++]);

@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 /**
+ * Класс для запуска программы
  * @author AlekseyRomantsov
  * @version 1.0.0.0
  * @since 01.05.2018

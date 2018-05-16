@@ -1,11 +1,22 @@
 package ru.job4j.tracker;
 
+/**
+ * Меню пользователя задачника
+ * @author AlekseyRomantsov
+ * @version 1.0.0.0
+ * @since 16.05.2018
+  */
 public class MenuTracker {
     private UserAction[] actions = new UserAction[7];
     private Tracker tracker;
     private Input input;
     private boolean exit;
 
+    /**
+     * Создание меню с заполнением возможных действий пользователя
+     * @param tracker - задачник
+     * @param input - один из вариантов ввода данных
+     */
     public MenuTracker(Tracker tracker, Input input) {
         this.tracker = tracker;
         this.input = input;
@@ -39,7 +50,9 @@ public class MenuTracker {
         return range;
     }
 
-
+    /**
+     * Основной метод - запрашивает и отрабатывает выбор пунктов меню в цилке
+     */
     public void run() {
         while (!exit) {
             this.showMenu();
@@ -48,6 +61,9 @@ public class MenuTracker {
         }
     }
 
+    /**
+     * Действие пользователя - создать новый элемент-задачу
+     */
     private class CreateItem implements UserAction {
         @Override
         public int key() {
@@ -70,6 +86,9 @@ public class MenuTracker {
         }
     }
 
+    /**
+     * Действие пользователя - показать все задачи
+     */
     private static class ShowAllItems implements UserAction {
         @Override
         public int key() {
@@ -91,6 +110,9 @@ public class MenuTracker {
         }
     }
 
+    /**
+     * Действие пользователя - отредактировать элемент-задачу
+     */
     private class EditItem implements UserAction {
         @Override
         public int key() {
@@ -119,6 +141,9 @@ public class MenuTracker {
         }
     }
 
+    /**
+     * Действие пользователя - найти элемент по известному id
+     */
     private class FindItemById implements UserAction {
         @Override
         public int key() {
@@ -142,6 +167,9 @@ public class MenuTracker {
         }
     }
 
+    /**
+     * Действие пользователя - найти элементы-задачи по наименованию
+     */
     private class FindItemsByName implements UserAction {
         @Override
         public int key() {
@@ -167,6 +195,9 @@ public class MenuTracker {
         }
     }
 
+    /**
+     * Действие пользователя - выход, завершить работу с меню и задачником
+     */
     private class ExitMenu implements UserAction {
         @Override
         public int key() {
@@ -186,6 +217,9 @@ public class MenuTracker {
 
 }
 
+/**
+ * Действие пользователя - удалить задачу
+ */
 class DeleteItem implements UserAction {
     @Override
     public int key() {
