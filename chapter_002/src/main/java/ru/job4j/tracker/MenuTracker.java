@@ -64,10 +64,10 @@ public class MenuTracker {
     /**
      * Действие пользователя - создать новый элемент-задачу
      */
-    private class CreateItem implements UserAction {
-        @Override
-        public int key() {
-            return 0;
+    private class CreateItem extends BaseAction {
+
+        public CreateItem() {
+            super(0, "Add new Item");
         }
 
         @Override
@@ -80,19 +80,14 @@ public class MenuTracker {
             System.out.println("------------ Новая заявка с getId : " + item.getId() + "-----------");
         }
 
-        @Override
-        public String showInfo() {
-            return "0. Add new Item";
-        }
     }
 
     /**
      * Действие пользователя - показать все задачи
      */
-    private static class ShowAllItems implements UserAction {
-        @Override
-        public int key() {
-            return 1;
+    private static class ShowAllItems extends BaseAction {
+        public ShowAllItems() {
+            super(1, "Show all items");
         }
 
         @Override
@@ -103,20 +98,14 @@ public class MenuTracker {
                 System.out.println(curItem);
             }
         }
-
-        @Override
-        public String showInfo() {
-            return "1. Show all items";
-        }
     }
 
     /**
      * Действие пользователя - отредактировать элемент-задачу
      */
-    private class EditItem implements UserAction {
-        @Override
-        public int key() {
-            return 2;
+    private class EditItem extends BaseAction {
+        public EditItem() {
+            super(2, "Edit item");
         }
 
         @Override
@@ -134,20 +123,14 @@ public class MenuTracker {
                 System.out.println("Заявки с таким id не найдено");
             }
         }
-
-        @Override
-        public String showInfo() {
-            return "2. Edit item";
-        }
     }
 
     /**
      * Действие пользователя - найти элемент по известному id
      */
-    private class FindItemById implements UserAction {
-        @Override
-        public int key() {
-            return 4;
+    private class FindItemById extends BaseAction {
+        public FindItemById() {
+            super(4, "Find item by id");
         }
 
         @Override
@@ -160,20 +143,14 @@ public class MenuTracker {
                 System.out.println("Заявки с таким id не найдено");
             }
         }
-
-        @Override
-        public String showInfo() {
-            return "4. Find item by id";
-        }
     }
 
     /**
      * Действие пользователя - найти элементы-задачи по наименованию
      */
-    private class FindItemsByName implements UserAction {
-        @Override
-        public int key() {
-            return 5;
+    private class FindItemsByName extends BaseAction {
+        public FindItemsByName() {
+            super(5, "Find items by name");
         }
 
         @Override
@@ -188,30 +165,19 @@ public class MenuTracker {
                 }
             }
         }
-
-        @Override
-        public String showInfo() {
-            return "5. Find items by name";
-        }
     }
 
     /**
      * Действие пользователя - выход, завершить работу с меню и задачником
      */
-    private class ExitMenu implements UserAction {
-        @Override
-        public int key() {
-            return 6;
+    private class ExitMenu extends BaseAction {
+        public ExitMenu() {
+            super(6, "Exit Program");
         }
 
         @Override
         public void execute(Input input, Tracker tracker) {
             exit = true;
-        }
-
-        @Override
-        public String showInfo() {
-            return "6. Exit Program";
         }
     }
 
@@ -220,10 +186,9 @@ public class MenuTracker {
 /**
  * Действие пользователя - удалить задачу
  */
-class DeleteItem implements UserAction {
-    @Override
-    public int key() {
-        return 3;
+class DeleteItem extends BaseAction {
+    public DeleteItem() {
+        super(3, "Delete item");
     }
 
     @Override
@@ -238,10 +203,5 @@ class DeleteItem implements UserAction {
         } else {
             System.out.println("Заявки с таким id не найдено");
         }
-    }
-
-    @Override
-    public String showInfo() {
-        return "3. Delete item";
     }
 }

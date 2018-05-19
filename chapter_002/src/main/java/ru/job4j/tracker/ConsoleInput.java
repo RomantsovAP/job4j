@@ -1,7 +1,5 @@
 package ru.job4j.tracker;
 
-
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -11,7 +9,7 @@ import java.util.Scanner;
  * @since 16.05.2018
  */
 public class ConsoleInput implements Input {
-    Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
     /**
      * Задает вопрос пользователю и считывает 1 строку ввода данных
