@@ -1,4 +1,7 @@
-package ru.job4j.chess;
+package ru.job4j.chess.figures;
+
+import ru.job4j.chess.Cell;
+import ru.job4j.chess.ImpossibleMoveException;
 
 /**
  * Шахматная фигура
@@ -7,7 +10,7 @@ package ru.job4j.chess;
  * @version 1.0.0.0
  */
 public abstract class Figure {
-    final Cell position;
+    public final Cell position;
 
     public Figure(Cell position) {
         this.position = position;
@@ -20,12 +23,12 @@ public abstract class Figure {
      * @return - массив промежуточных ячеек
      * @throws ImpossibleMoveException - выбрасывается когда нельзя за 1 ход достичь указанной ячейки
      */
-    abstract Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException;
+    public abstract Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException;
 
     /**
      * Создает копию фигуры в указанной клетке
      * @param dest - клетка куда переместилась фигура
      * @return - ссылка на фигуру
      */
-    abstract Figure copy(Cell dest);
+    public abstract Figure copy(Cell dest);
 }

@@ -9,8 +9,8 @@ import java.util.Objects;
  * @version 1.0.0.0
  */
 public class Cell {
-    int x;
-    int y;
+    public final int x;
+    public final int y;
 
     public Cell(int x, int y) {
         this.x = x;

@@ -1,16 +1,19 @@
-package ru.job4j.chess;
+package ru.job4j.chess.figures;
+
+import ru.job4j.chess.Cell;
+import ru.job4j.chess.ImpossibleMoveException;
 
 import java.util.ArrayList;
 
 /**
- * Слон
+ * Пешка
  * @author AlekseyRomantsov
- * @since 19.05.2018
+ * @since 20.05.2018
  * @version 1.0.0.0
  */
-public class Bishop extends Figure {
+public class Pawn extends Figure {
 
-    public Bishop(Cell position) {
+    public Pawn(Cell position) {
         super(position);
     }
 
@@ -23,18 +26,19 @@ public class Bishop extends Figure {
      */
     @Override
     public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
-        if (Math.abs(dest.x - source.x) != Math.abs(dest.y - source.y)) {
+        if (dest.x != source.x || source.equals(dest) || Math.abs(dest.y - source.y) > 2) {
             throw new ImpossibleMoveException();
         }
         ArrayList<Cell> wayList = new ArrayList<>();
-        int dx = (dest.x - source.x) > 0 ? 1 : -1;
         int dy = (dest.y - source.y) > 0 ? 1 : -1;
-        Cell currentCell = new Cell(source.x, source.y);
-        while (!currentCell.equals(dest)) {
-            currentCell = new Cell(currentCell.x + dx, currentCell.y + dy);
-            wayList.add(currentCell);
+        int dx = 0;
+
+        Cell cell = new Cell(source.x, source.y);
+        while (!cell.equals(dest)) {
+            cell = new Cell(cell.x + dx, cell.y + dy);
+            wayList.add(cell);
         }
-        wayList.remove(currentCell);
+        wayList.remove(cell);
         Cell[] way = new Cell[wayList.size()];
         wayList.toArray(way);
         return way;
@@ -42,6 +46,6 @@ public class Bishop extends Figure {
 
     @Override
     public Figure copy(Cell dest) {
-        return new Bishop(dest);
+        return new Pawn(dest);
     }
 }

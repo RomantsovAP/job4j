@@ -1,7 +1,11 @@
-package ru.job4j.chess;
+package ru.job4j.chess.figures;
 
 
 import org.junit.Test;
+import ru.job4j.chess.Cell;
+import ru.job4j.chess.ImpossibleMoveException;
+import ru.job4j.chess.figures.Bishop;
+import ru.job4j.chess.figures.Figure;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -54,5 +58,17 @@ public class BishopTest {
         assertThat(result, is("right exception"));
     }
 
-
+    @Test
+    public void whenFigureCantStay() {
+        String result = "no exception";
+        Figure figure = new Bishop(new Cell(5, 3));
+        try {
+            figure.way(figure.position, figure.position);
+        } catch (ImpossibleMoveException e) {
+            result = "right exception";
+        } catch (RuntimeException e) {
+            result = "wrong exception";
+        }
+        assertThat(result, is("right exception"));
+    }
 }

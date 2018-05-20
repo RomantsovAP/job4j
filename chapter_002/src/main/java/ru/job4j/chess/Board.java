@@ -1,5 +1,7 @@
 package ru.job4j.chess;
 
+import ru.job4j.chess.figures.Figure;
+
 /**
  * Шахматная доска, поле
  * @author AlekseyRomantsov
@@ -14,6 +16,38 @@ public class Board {
         figures[count++] = figure;
     }
 
+    private int getFigure(Cell cell) {
+        for (int i = 0; i < count; i++) {
+            if (figures[i].position.equals(cell)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int getFigureV2(Cell cell) {
+        int index = -1;
+        for (int i = 0; i < count; i++) {
+            if (figures[i].position.equals(cell)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+    private boolean isWayClear(Cell[] way) {
+        boolean clear = true;
+        for (int i = 0; i < way.length; i++) {
+            if (getFigure(way[i]) >= 0) {
+                clear = false;
+                break;
+            }
+        }
+        return clear;
+    }
+
+
     public boolean move(Cell source, Cell dest) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
         /*
         - Что в заданной ячейки есть фигура. если нет. то выкинуть исключение
@@ -21,33 +55,15 @@ public class Board {
         - Проверить что полученный путь. не занят фигурами. Если занят выкинуть исключение
         - Если все отлично. Записать в ячейку новое новое положение Figure figure.copy(Cell dest)
         */
-        Figure figure = null;
-        int figureIndex;
-        for (figureIndex = 0; figureIndex < count; figureIndex++) {
-            if (figures[figureIndex].position.equals(source)) {
-                figure = figures[figureIndex];
-                break;
-            }
-        }
-        if (figure == null) {
+        int figure = getFigure(source);
+        if (figure == -1) {
             throw new FigureNotFoundException();
         }
-        for (int i = 0; i < count; i++) {
-            if (figures[i].position.equals(dest)) {
-                throw new OccupiedWayException();
-            }
+        if (getFigure(dest) >= 0 || !isWayClear(figures[figure].way(source, dest))) {
+            throw new OccupiedWayException();
         }
-        Cell[] way = figure.way(source, dest);
-        for (int i = 0; i < way.length; i++) {
-            for (int j = 0; j < count; j++) {
-                if (figures[j].position.equals(way[i])) {
-                    throw new OccupiedWayException();
-                }
-            }
-        }
-        figures[figureIndex] = figure.copy(dest);
+        figures[figure] = figures[figure].copy(dest);
         return true;
     }
-
 
 }
