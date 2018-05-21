@@ -2,6 +2,10 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -12,7 +16,7 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "testDescription", "123L");
         tracker.add(item);
-        assertThat(tracker.findAll()[0], is(item));
+        assertThat(tracker.findAll().get(0), is(item));
     }
 
 
@@ -35,11 +39,11 @@ public class TrackerTest {
     public void whenAddItemThenWeHaveMoreItemsInTracker() {
         Tracker tracker = new Tracker();
         Item curItem;
-        Item[] resultQue = new Item[4];
+        List<Item> resultQue = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             curItem = new Item("item" + i, "desk" + i);
             tracker.add(curItem);
-            resultQue[i] = curItem;
+            resultQue.add(curItem);
         }
 
         assertThat(tracker.findAll(), is(resultQue));
@@ -48,11 +52,11 @@ public class TrackerTest {
     @Test public void whenDeleteSomeItemThenItDeletes() {
         Tracker tracker = new Tracker();
         Item curItem;
-        Item[] resultQue = new Item[3];
+        List<Item> resultQue = new ArrayList<>();
 
         curItem = new Item("item1", "desk1");
         tracker.add(curItem);
-        resultQue[0] = curItem;
+        resultQue.add(curItem);
 
         curItem = new Item("item2", "desk2");
         tracker.add(curItem);
@@ -60,11 +64,11 @@ public class TrackerTest {
 
         curItem = new Item("item3", "desk3");
         tracker.add(curItem);
-        resultQue[1] = curItem;
+        resultQue.add(curItem);
 
         curItem = new Item("item4", "desk4");
         tracker.add(curItem);
-        resultQue[2] = curItem;
+        resultQue.add(curItem);
 
         tracker.delete(id);
         assertThat(tracker.findAll(), is(resultQue));
@@ -73,13 +77,13 @@ public class TrackerTest {
     @Test public void whenFindByNameLastElemThenItFindIt() {
         Tracker tracker = new Tracker();
         Item curItem;
-        Item[] result = new Item[1];
+        List<Item> result = new ArrayList<>();
 
         for (int i = 0; i < 4; i++) {
             curItem = new Item("item" + i, "desk" + i);
             tracker.add(curItem);
             if (i == 3) {
-                 result[0] = curItem;
+                 result.add(curItem);
             }
         }
 
@@ -89,12 +93,12 @@ public class TrackerTest {
     @Test public void whenFindByNameAllElemsThenItFindItAll() {
         Tracker tracker = new Tracker();
         Item curItem;
-        Item[] result = new Item[4];
+        List<Item> result = new ArrayList<>();
 
         for (int i = 0; i < 4; i++) {
             curItem = new Item("item1", "desk1");
             tracker.add(curItem);
-            result[i] = curItem;
+            result.add(curItem);
         }
 
         assertThat(tracker.findByName("item1"), is(result));

@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Меню пользователя задачника
  * @author AlekseyRomantsov
@@ -7,7 +10,7 @@ package ru.job4j.tracker;
  * @since 16.05.2018
   */
 public class MenuTracker {
-    private UserAction[] actions = new UserAction[7];
+    private List<UserAction> actions = new ArrayList<>();
     private Tracker tracker;
     private Input input;
     private boolean exit;
@@ -33,19 +36,19 @@ public class MenuTracker {
     }
 
     private void fillActions() {
-        actions[0] = new CreateItem();
-        actions[1] = new ShowAllItems();
-        actions[2] = new EditItem();
-        actions[3] = new DeleteItem();
-        actions[4] = new FindItemById();
-        actions[5] = new FindItemsByName();
-        actions[6] = new ExitMenu();
+        actions.add(new CreateItem());
+        actions.add(new ShowAllItems());
+        actions.add(new EditItem());
+        actions.add(new DeleteItem());
+        actions.add(new FindItemById());
+        actions.add(new FindItemsByName());
+        actions.add(new ExitMenu());
     }
 
     private int[] fillMenuRange() {
-        int[] range = new int[actions.length];
+        int[] range = new int[this.actions.size()];
         for (int i = 0; i < range.length; i++) {
-            range[i] = actions[i].key();
+            range[i] = this.actions.get(i).key();
         }
         return range;
     }
@@ -57,7 +60,7 @@ public class MenuTracker {
         while (!exit) {
             this.showMenu();
             int numberOfAction = this.input.ask("Введите пункт меню : ", fillMenuRange());
-            actions[numberOfAction].execute(input, tracker);
+            actions.get(numberOfAction).execute(input, tracker);
         }
     }
 
@@ -93,8 +96,8 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             System.out.println("------------ Полный список заявок --------------");
-            Item[] items = tracker.findAll();
-            for (Item curItem:items) {
+            List<Item> items = tracker.findAll();
+            for (Item curItem : items) {
                 System.out.println(curItem);
             }
         }
@@ -156,8 +159,8 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             String name = input.ask("Введите наименование заявки");
-            Item[] foundItems = tracker.findByName(name);
-            if (foundItems.length == 0) {
+            List<Item> foundItems = tracker.findByName(name);
+            if (foundItems.size() == 0) {
                 System.out.println("Заявок не найдено");
             } else {
                 for (Item currItem : foundItems) {

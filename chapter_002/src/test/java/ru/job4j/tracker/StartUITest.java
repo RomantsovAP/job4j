@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -40,7 +42,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();     // создаём Tracker
         Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});   //создаём StubInput с последовательностью действий
         new StartUI(input, tracker).init();     //   создаём StartUI и вызываем метод init()
-        assertThat(tracker.findAll()[0].getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
+        assertThat(tracker.findAll().get(0).getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
     }
 
     @Test
@@ -66,7 +68,7 @@ public class StartUITest {
         Item item = tracker.add(new Item());
         Input input = new StubInput(new String[]{"3", item.getId(), "y", "6"});
         new StartUI(input, tracker).init();
-        assertThat(tracker.findAll().length, is(2));
+        assertThat(tracker.findAll().size(), is(2));
         assertThat(tracker.findById(item.getId()), is(Tracker.NULL_ITEM));
     }
 
@@ -83,13 +85,13 @@ public class StartUITest {
 
     @Test
     public void when2ItemsWithSameNameThenItFoundThemAll() {
-        Item[] result = new Item[2];
+        List<Item> result = new ArrayList<>();
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("123", "321"));
-        result[0] = item;
+        result.add(item);
         tracker.add(new Item("111", "343"));
         item = tracker.add(new Item("123", "321"));
-        result[1] = item;
+        result.add(item);
         tracker.add(new Item("222", "333"));
         Input input = new StubInput(new String[]{"5", "123", "6"});
         new StartUI(input, tracker).init();
