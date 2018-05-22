@@ -23,4 +23,41 @@ public class SortUserTest {
         assertThat(users.get(5), is((User) utils.sort(users).toArray()[0]));
         assertThat(users.get(5), is(((TreeSet<User>) utils.sort(users)).first()));
     }
+
+    @Test
+    public void whenSomeUsersListSortedByNameLengthThenItNameLengthAscending() {
+        List<User> users = new ArrayList<>();
+        users.add(new User("5555", 5));
+        users.add(new User("22", 2));
+        users.add(new User("333", 4));
+        users.add(new User("454545", 7));
+        users.add(new User("11", 2));
+        users.add(new User("6666", 1));
+        users.add(new User("7777", 9));
+        SortUser utils = new SortUser();
+        assertThat(users.get(1), is((utils.sortNameLength(users)).get(0)));
+    }
+
+    @Test
+    public void whenSomeUsersListSortedByNameAndAgeThenItNormSorted() {
+        List<User> users = new ArrayList<>();
+        List<User> sorted = new ArrayList<>();
+        users.add(new User("5555", 5));
+        users.add(new User("22", 2));
+        users.add(new User("333", 4));
+        users.add(new User("454545", 7));
+        users.add(new User("11", 2));
+        users.add(new User("5555", 1));
+        users.add(new User("5555", 9));
+        sorted.add(users.get(4));
+        sorted.add(users.get(1));
+        sorted.add(users.get(2));
+        sorted.add(users.get(3));
+        sorted.add(users.get(5));
+        sorted.add(users.get(0));
+        sorted.add(users.get(6));
+        SortUser utils = new SortUser();
+        assertThat(sorted, is((utils.sortByAllFields(users))));
+    }
+
 }
