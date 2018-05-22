@@ -9,11 +9,20 @@ import java.util.*;
  * @version 1.0.0.0
  */
 public class SortUser {
-
+    /**
+     * формирует TreeSet по переданному списку пользователей
+     * @param users - список пользователей
+     * @return - TreeSet
+     */
     public Set<User> sort(List<User> users) {
         return new TreeSet<>(users);
     }
 
+    /**
+     * Сортировка списка по длине имен
+     * @param users - список пользователей
+     * @return - отсортированный список пользователей
+     */
     public List<User> sortNameLength(List<User> users) {
         List<User> result = new ArrayList<>(users);
         result.sort(new Comparator<User>() {
@@ -25,6 +34,11 @@ public class SortUser {
         return result;
     }
 
+    /**
+     * Сортировка по имени и возрасту
+     * @param users - список пользователей
+     * @return - отсортированный по имени и возрасту список пользователей
+     */
     public List<User> sortByAllFields(List<User> users) {
         List<User> result = new ArrayList<>(users);
         result.sort(new Comparator<User>() {
