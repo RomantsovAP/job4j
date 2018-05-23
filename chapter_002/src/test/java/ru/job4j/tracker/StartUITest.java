@@ -21,8 +21,8 @@ public class StartUITest {
     private final ByteArrayOutputStream fakeConsole = new ByteArrayOutputStream();
 
     private void addMenuToStringBuilder(StringBuilder stringBuilder) {
-        stringBuilder.append("****************"+System.lineSeparator()+"Меню."+System.lineSeparator()+"0. Add new Item"+System.lineSeparator()+"1. Show all items"+System.lineSeparator()+"2. Edit item"+System.lineSeparator());
-        stringBuilder.append("3. Delete item"+System.lineSeparator()+"4. Find item by id"+System.lineSeparator()+"5. Find items by name"+System.lineSeparator()+"6. Exit Program"+System.lineSeparator());
+        stringBuilder.append("****************" + System.lineSeparator() + "Меню." + System.lineSeparator() + "0. Add new Item" + System.lineSeparator() + "1. Show all items" + System.lineSeparator() + "2. Edit item" + System.lineSeparator());
+        stringBuilder.append("3. Delete item" + System.lineSeparator() + "4. Find item by id" + System.lineSeparator() + "5. Find items by name" + System.lineSeparator() + "6. Exit Program" + System.lineSeparator());
     }
 
     @Before
