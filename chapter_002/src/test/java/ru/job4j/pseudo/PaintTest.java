@@ -32,13 +32,13 @@ public class PaintTest {
     public void whenTriangleDrawThenItOutputTriangleToConsole() {
         String result = new StringBuilder()
                 .append("*")
-                .append(System.lineSeparator())
+                .append("\r\n")
                 .append("**")
-                .append(System.lineSeparator())
+                .append("\r\n")
                 .append("***")
-                .append(System.lineSeparator())
+                .append("\r\n")
                 .append("****")
-                .append(System.lineSeparator())
+                .append("\r\n")
                 .toString();
 
         Paint paint = new Paint();
@@ -50,13 +50,13 @@ public class PaintTest {
     public void whenSquareDrawThenItOutputSquareToConsole() {
         String result = new StringBuilder()
                 .append("****")
-                .append(System.lineSeparator())
+                .append("\r\n")
                 .append("****")
-                .append(System.lineSeparator())
+                .append("\r\n")
                 .append("****")
-                .append(System.lineSeparator())
+                .append("\r\n")
                 .append("****")
-                .append(System.lineSeparator())
+                .append("\r\n")
                 .toString();
 
         Paint paint = new Paint();

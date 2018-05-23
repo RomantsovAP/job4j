@@ -21,8 +21,8 @@ public class StartUITest {
     private final ByteArrayOutputStream fakeConsole = new ByteArrayOutputStream();
 
     private void addMenuToStringBuilder(StringBuilder stringBuilder) {
-        stringBuilder.append("****************\r\nМеню.\r\n0. Add new Item\r\n1. Show all items\r\n2. Edit item\r\n");
-        stringBuilder.append("3. Delete item\r\n4. Find item by id\r\n5. Find items by name\r\n6. Exit Program\r\n");
+        stringBuilder.append("****************"+System.lineSeparator()+"Меню."+System.lineSeparator()+"0. Add new Item"+System.lineSeparator()+"1. Show all items"+System.lineSeparator()+"2. Edit item"+System.lineSeparator());
+        stringBuilder.append("3. Delete item"+System.lineSeparator()+"4. Find item by id"+System.lineSeparator()+"5. Find items by name"+System.lineSeparator()+"6. Exit Program"+System.lineSeparator());
     }
 
     @Before
@@ -102,16 +102,16 @@ public class StartUITest {
     public void whenFindAllItemsThenAllItemsAreShown() {
         StringBuilder result = new StringBuilder();
         addMenuToStringBuilder(result);
-        result.append("------------ Полный список заявок --------------\r\n");
+        result.append("------------ Полный список заявок --------------" + System.lineSeparator());
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("123", "321"));
-        result.append(item.toString() + "\r\n");
+        result.append(item.toString() + System.lineSeparator());
         item = tracker.add(new Item("111", "343"));
-        result.append(item.toString() + "\r\n");
+        result.append(item.toString() + System.lineSeparator());
         item = tracker.add(new Item("123", "321"));
-        result.append(item.toString() + "\r\n");
+        result.append(item.toString() + System.lineSeparator());
         item = tracker.add(new Item("222", "333"));
-        result.append(item.toString() + "\r\n");
+        result.append(item.toString() + System.lineSeparator());
         Input input = new StubInput(new String[]{"1", "6"});
         new StartUI(input, tracker).init();
         addMenuToStringBuilder(result);
