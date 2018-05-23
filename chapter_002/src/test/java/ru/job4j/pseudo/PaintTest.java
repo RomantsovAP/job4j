@@ -38,7 +38,7 @@ public class PaintTest {
                 .append("***")
                 .append("\r\n")
                 .append("****")
-                .append("\r\n")
+                .append(System.lineSeparator())
                 .toString();
 
         Paint paint = new Paint();
@@ -56,7 +56,7 @@ public class PaintTest {
                 .append("****")
                 .append("\r\n")
                 .append("****")
-                .append("\r\n")
+                .append(System.lineSeparator())
                 .toString();
 
         Paint paint = new Paint();
