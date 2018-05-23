@@ -45,7 +45,7 @@ public class SortUser {
             @Override
             public int compare(User o1, User o2) {
                 int compare = o1.getName().compareToIgnoreCase(o2.getName());
-                compare = (compare != 0) ? compare : Integer.compare(o1.getAge(),o2.getAge());
+                compare = (compare != 0) ? compare : Integer.compare(o1.getAge(), o2.getAge());
                 return compare;
             }
         });
