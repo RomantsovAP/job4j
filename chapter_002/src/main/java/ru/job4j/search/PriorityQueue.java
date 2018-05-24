@@ -17,7 +17,7 @@ public class PriorityQueue {
      * @param priority - приоритет нашей задачи
      * @return - индекс первой задачи с меньшим приоритетом, чем укаазан в параметрах
      */
-    private int fingTaskWithLessPriority(int priority) {
+    private int findTaskWithLessPriority(int priority) {
         int index = tasks.size(); // по-умолчанию в самый конец, после всех задач
         for (Task currentTask : tasks) {
             if (currentTask.getPriority() > priority) {
@@ -34,7 +34,7 @@ public class PriorityQueue {
      * @param task задача
      */
     public void put(Task task) {
-        int index = fingTaskWithLessPriority(task.getPriority());
+        int index = findTaskWithLessPriority(task.getPriority());
         tasks.add(index, task);
     }
 
