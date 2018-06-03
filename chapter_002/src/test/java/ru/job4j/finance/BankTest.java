@@ -145,4 +145,33 @@ public class BankTest {
         assertThat(fakeConsole.toString(), is("Не обнаружено счетов с такими реквизитами" + System.lineSeparator()));
     }
 
+    @Test
+    public void whenDeleteSomeAccountThenItDeletes() {
+        Bank bank = new Bank();
+
+        User testUser = new User("Ivan", "12345: 11233");
+        bank.addUser(testUser);
+
+        Account account = new Account(0, "401003940934544");
+        bank.addAccountToUser("12345: 11233", account);
+
+        bank.deleteAccountFromUser("12345: 11233", account);
+        assertThat(0, is(bank.getUserAccounts("12345: 11233").size()));
+    }
+
+    @Test
+    public void whenDeleteSomeNotEmptyAccountThenItNotDeletes() {
+        Bank bank = new Bank();
+
+        User testUser = new User("Ivan", "12345: 11233");
+        bank.addUser(testUser);
+
+        Account account = new Account(123, "401003940934544");
+        bank.addAccountToUser("12345: 11233", account);
+
+        bank.deleteAccountFromUser("12345: 11233", account);
+        assertThat(1, is(bank.getUserAccounts("12345: 11233").size()));
+        assertThat(fakeConsole.toString(), is("Невозможно удалить счет, на котором есть остаток денежных средств" + System.lineSeparator()));
+    }
+
 }

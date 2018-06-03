@@ -15,16 +15,26 @@ public class Bank {
     private static final User EMPTY_USER = new User("", "");
     private static final Account EMPTY_ACCOUNT = new Account(0, "");
 
+    /**
+     * Добавляет очередного клиента нашего банка
+     * @param user - новый клиент
+     */
     public void addUser(User user) {
         if (user != null) {
             userAccounts.putIfAbsent(user, new ArrayList<>());
         }
     }
 
+    //возвпащает перечень всех клиентов банка со счетами
     public Map<User, List<Account>> getAllUserAccounts() {
         return new TreeMap<>(userAccounts);
     }
 
+    /**
+     * Проверяет, что все счета закрыты в 0
+     * @param accounts
+     * @return
+     */
     private boolean allAccountsAreEmpty(ArrayList<Account> accounts) {
         boolean empty = true;
         for (Account account: accounts) {
@@ -36,6 +46,10 @@ public class Bank {
         return empty;
     }
 
+    /**
+     * Удаляет клиента банка
+     * @param user - клиент
+     */
     public void deleteUser(User user) {
         if (user != null && userAccounts.containsKey(user)) {
             ArrayList<Account> accounts = (ArrayList<Account>) userAccounts.get(user);
@@ -49,6 +63,11 @@ public class Bank {
         }
     }
 
+    /**
+     * Ищет клиента по переданным паспортным данным
+     * @param passport - паспортные данные
+     * @return - найденный пользователь
+     */
     private User findUserByPassport(String passport) {
         User userFound = Bank.EMPTY_USER;
         for (User user : userAccounts.keySet()) {
@@ -60,6 +79,11 @@ public class Bank {
         return userFound;
     }
 
+    /**
+     * Добавляет очередной счет пользователю
+     * @param passport - паспортные данные пользователя
+     * @param account - новый счет
+     */
     public void addAccountToUser(String passport, Account account) {
         User user = findUserByPassport(passport);
         if (user != Bank.EMPTY_USER && userAccounts.containsKey(user)) {
@@ -73,14 +97,28 @@ public class Bank {
         }
     }
 
+    /**
+     * Удаляет счет пользователя
+     * @param passport - паспортные данные пользователя
+     * @param account - счет
+     */
     public void deleteAccountFromUser(String passport, Account account) {
         User user = findUserByPassport(passport);
         if (user != Bank.EMPTY_USER && userAccounts.containsKey(user) && account != null) {
             ArrayList<Account> accounts = (ArrayList<Account>) userAccounts.get(user);
-            accounts.remove(account);
+            if (account.getAmount() == 0) {
+                accounts.remove(account);
+            } else {
+                System.out.println("Невозможно удалить счет, на котором есть остаток денежных средств");
+            }
         }
     }
 
+    /**
+     * Формирует список всех счетов пользователя
+     * @param passport - паспортные данные пользователя
+     * @return - список счетов
+     */
     public List<Account> getUserAccounts(String passport) {
         List<Account> accounts = new ArrayList<>();
         User user = findUserByPassport(passport);
@@ -90,6 +128,12 @@ public class Bank {
         return accounts;
     }
 
+    /**
+     * Ищет счет клиента банка по реквизитам
+     * @param user - клиент банка
+     * @param requisite - реквизиты
+     * @return - найденный счет
+     */
     private Account findAccountByRequisite(User user, String requisite) {
         Account accountFound = Bank.EMPTY_ACCOUNT;
         List<Account> accounts = userAccounts.get(user);
@@ -100,6 +144,15 @@ public class Bank {
         return accountFound;
     }
 
+    /**
+     * Переводит денежные средства со счета на счет
+     * @param srcPassport - паспортные данные отправителя
+     * @param srcRequisite - реквизиты счета отправителя
+     * @param destPassport - паспортные данные получателя
+     * @param dstRequisite - реквизиты счета получателя
+     * @param amount - переводимая сумма (в центах\копейках)
+     * @return - успешно или нет прошла операция
+     */
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, int amount) {
         boolean complete = false;
         User srcUser    = findUserByPassport(srcPassport);
