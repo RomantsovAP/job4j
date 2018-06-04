@@ -13,7 +13,7 @@ import java.util.TreeMap;
 public class Bank {
     private final Map<User, List<Account>> userAccounts = new TreeMap<>();
     private static final User EMPTY_USER = new User("", "");
-    private static final Account EMPTY_ACCOUNT = new Account(0, "");
+    static final Account EMPTY_ACCOUNT = new Account(0, "");
 
     /**
      * Добавляет очередного клиента нашего банка
@@ -160,17 +160,7 @@ public class Bank {
         if (srcUser != Bank.EMPTY_USER && destUser != Bank.EMPTY_USER) {
             Account srcAccount = findAccountByRequisite(srcUser, srcRequisite);
             Account destAccount = findAccountByRequisite(destUser, dstRequisite);
-            if (srcAccount != Bank.EMPTY_ACCOUNT && destAccount != Bank.EMPTY_ACCOUNT) {
-                if (srcAccount.getAmount() >= amount) {
-                    srcAccount.setAmount(srcAccount.getAmount() - amount);
-                    destAccount.setAmount(destAccount.getAmount() + amount);
-                    complete = true;
-                } else {
-                    System.out.println("Недостаточно средств");
-                }
-            } else {
-                System.out.println("Не обнаружено счетов с такими реквизитами");
-            }
+            complete = srcAccount.transfer(destAccount, amount);
         } else {
             System.out.println("Не удалось идентифицировать клиентов по данным паспортам");
         }

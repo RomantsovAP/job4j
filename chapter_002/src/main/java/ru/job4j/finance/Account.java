@@ -49,4 +49,20 @@ public class Account {
     public int hashCode() {
         return Objects.hash(requisites);
     }
+
+    public boolean transfer(Account destAccount, int amount) {
+        boolean complete = false;
+        if (this != Bank.EMPTY_ACCOUNT && destAccount != Bank.EMPTY_ACCOUNT) {
+            if (this.getAmount() >= amount) {
+                this.setAmount(this.getAmount() - amount);
+                destAccount.setAmount(destAccount.getAmount() + amount);
+                complete = true;
+            } else {
+                System.out.println("Недостаточно средств");
+            }
+        } else {
+            System.out.println("Не обнаружено счетов с такими реквизитами");
+        }
+        return complete;
+    }
 }
