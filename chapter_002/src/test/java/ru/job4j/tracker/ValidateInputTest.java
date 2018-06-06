@@ -38,7 +38,7 @@ public class ValidateInputTest {
         assertThat(
                 this.mem.toString(),
                 is(
-                        String.format("Please enter validate data again.%n")
+                       String.format("Please enter validate data again.%n")
                 )
         );
     }
