@@ -1,4 +1,4 @@
-package ru.job4j.gitRebaseTest;
+package ru.job4j.gitrebasetest;
 
 public class SomeClass {
 
