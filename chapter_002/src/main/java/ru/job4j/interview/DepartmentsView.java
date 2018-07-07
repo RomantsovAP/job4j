@@ -61,7 +61,7 @@ public class DepartmentsView {
                     result = o1Code.compareTo(o2Code);
                 } else {
                     int minLength = (o1Code.length() > o2Code.length()) ? o2Code.length() : o1Code.length();
-                    result = o2Code.substring(0,minLength).compareTo(o1Code.substring(0,minLength));
+                    result = o2Code.substring(0, minLength).compareTo(o1Code.substring(0, minLength));
                     result = (result == 0) ? o1Code.length() - o2Code.length() : result;
                 }
                 return result;
