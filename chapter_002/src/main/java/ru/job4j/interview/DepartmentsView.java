@@ -22,15 +22,19 @@ public class DepartmentsView {
     }
 
     private void checkForMissedDepartments(List<Department> departmentList) {
+        HashSet<String> checkedCodes = new HashSet<>();
         ListIterator<Department> iterator = departmentList.listIterator();
         while (iterator.hasNext()) {
             Department dep = iterator.next();
             String[] codes = dep.getFullCode().split("\\\\");
             String checkFullCode = codes[0];
             for (int i = 0; i < codes.length - 1; i++) {
-                Department checkingDepartment = new Department(checkFullCode, codes[i]);
-                if (!departmentList.contains(checkingDepartment)) {
-                    iterator.add(checkingDepartment);
+                if (!checkedCodes.contains(checkFullCode)) {
+                    Department checkingDepartment = new Department(checkFullCode, codes[i]);
+                    if (!departmentList.contains(checkingDepartment)) {
+                        iterator.add(checkingDepartment);
+                    }
+                    checkedCodes.add(checkFullCode);
                 }
                 checkFullCode += "\\" + codes[i + 1];
             }
@@ -50,18 +54,16 @@ public class DepartmentsView {
         sortingList.sort(new Comparator<Department>() {
             @Override
             public int compare(Department o1, Department o2) {
-                String[] codes1 = o1.getFullCode().split("\\\\");
-                String[] codes2 = o2.getFullCode().split("\\\\");
-                int result = 0;
-                int min = codes1.length > codes2.length ? codes2.length : codes1.length;
-                for (int i = 0; i < min; i++) {
-                    if (order != SortingOrder.ASCENDING) {
-                        result = (result == 0) ? codes2[i].compareTo(codes1[i]) : result;
-                    } else {
-                        result = (result == 0) ? codes1[i].compareTo(codes2[i]) : result;
-                    }
+                int result;
+                String o1Code = o1.getFullCode();
+                String o2Code = o2.getFullCode();
+                if (order == SortingOrder.ASCENDING) {
+                    result = o1Code.compareTo(o2Code);
+                } else {
+                    int minLength = (o1Code.length() > o2Code.length()) ? o2Code.length() : o1Code.length();
+                    result = o2Code.substring(0,minLength).compareTo(o1Code.substring(0,minLength));
+                    result = (result == 0) ? o1Code.length() - o2Code.length() : result;
                 }
-                result = (result == 0) ? codes1.length - codes2.length : result;
                 return result;
             }
         });
