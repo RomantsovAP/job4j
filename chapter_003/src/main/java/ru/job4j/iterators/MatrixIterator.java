@@ -1,9 +1,14 @@
 package ru.job4j.iterators;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * Итератор для массива массивов целых чисел
+ * @author AlekseyRomantsov
+ * @version 1.0.0.0
+ * @since 07.07.2018
+ */
 public class MatrixIterator implements Iterator<Integer> {
 
     private int[][] array;
