@@ -15,23 +15,25 @@ public class EvenNumbersIterator implements Iterator<Integer> {
 
     private int[] array;
     private int currentPosition;
+    private int checkedPosition;
 
     public EvenNumbersIterator(int[] array) {
-        this.array = new int[array.length];
-        int length = 0;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] % 2 == 0) {
-                length++;
-                this.array[length - 1] = array[i];
-            }
-        }
-        this.array = Arrays.copyOf(this.array, length);
+        this.array = array;
         currentPosition = -1;
+        checkedPosition = -1;
     }
 
     @Override
     public boolean hasNext() {
-        return array.length > currentPosition + 1;
+        boolean result = false;
+        for (int i = currentPosition + 1; i < array.length; i++) {
+            if (array[i] % 2 == 0) {
+                result = true;
+                checkedPosition = i;
+                break;
+            }
+        }
+        return result;
     }
 
     @Override
@@ -39,6 +41,7 @@ public class EvenNumbersIterator implements Iterator<Integer> {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        return array[++currentPosition];
+        currentPosition = checkedPosition;
+        return array[currentPosition];
     }
 }
