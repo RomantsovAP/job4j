@@ -28,7 +28,7 @@ public class DynamicArrayListTest {
     }
 
     @Test(expected = ArrayIndexOutOfBoundsException.class)
-    public void whenGetForthElementFormThreeElementListItThrowsExc(){
+    public void whenGetForthElementFormThreeElementListItThrowsExc() {
         list.get(3);
     }
 

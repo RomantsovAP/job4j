@@ -44,7 +44,7 @@ public class DynamicArrayList<E> implements Iterable<E> {
         if (index >= size) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        return (E)container[index];
+        return (E) container[index];
     }
 
     /**
@@ -69,7 +69,7 @@ public class DynamicArrayList<E> implements Iterable<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return (E)container[position++];
+                return (E) container[position++];
             }
         };
     }
