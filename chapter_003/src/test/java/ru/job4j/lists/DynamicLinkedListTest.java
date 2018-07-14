@@ -68,4 +68,33 @@ public class DynamicLinkedListTest {
         }
         assertThat(6, is(sum));
     }
+
+    @Test
+    public void whenRemoveFirstItRemoves() {
+        list.removeFirst();
+        assertThat(2, is(list.getFirst()));
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void whenRemoveFirstWhileNoElementsLeftThenListIsEmpty() {
+        list.removeFirst();
+        list.removeFirst();
+        list.removeFirst();
+        list.getLast();
+    }
+
+    @Test
+    public void whenRemoveLastItRemoves() {
+        list.removeLast();
+        assertThat(2, is(list.getLast()));
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void whenRemoveLasttWhileNoElementsLeftThenListIsEmpty() {
+        list.removeLast();
+        list.removeLast();
+        list.removeLast();
+        list.get(0);
+    }
+
 }
