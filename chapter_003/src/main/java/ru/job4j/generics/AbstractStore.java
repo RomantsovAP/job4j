@@ -17,6 +17,7 @@ public class AbstractStore<T extends Base> implements Store<T> {
         for (int i = 0; i < storage.size(); i++) {
             if (storage.get(i) != null && id.equals(storage.get(i).getId())) {
                 result = i;
+                break;
             }
         }
         return result;
