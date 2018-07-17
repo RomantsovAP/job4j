@@ -16,6 +16,11 @@ public class CheckForCycles {
         public Node(T value) {
             this.value = value;
         }
+
+        @Override
+        public String toString() {
+            return "Node{" + "value=" + value + '}';
+        }
     }
 
     /**
@@ -24,6 +29,9 @@ public class CheckForCycles {
      * @return да, если есть циклы или петли
      */
     public boolean hasCycle(Node first) {
+        if (first == null) {
+            throw new IllegalArgumentException();
+        }
         ArrayList<Node> arr = new ArrayList<>();
         Node curentNode = first;
         while (curentNode != null && !arr.contains(curentNode)) {
@@ -49,30 +57,33 @@ public class CheckForCycles {
      * @return - да, если циклы есть
      */
     public boolean hasCycleMk2(Node first) {
-        boolean result = first == null;
-        boolean endIsReached = first == null;
-        int i = 0;
+        if (first == null) {
+            throw new IllegalArgumentException();
+        }
+        boolean result          = false;
+        boolean endIsReached    = false;
+        Node firstNode  = first;
+        Node secondNode   = first;
         while (!result) {
-
-            Node firstNode  = getNode(i, first);
-
-            if (firstNode == null) {
+            if (firstNode == null || secondNode == null) {
                 endIsReached = true;
                 break;
             }
-
             if (firstNode.next == firstNode) {
-                break;
+                break; // loop
             }
-
-            for (int j = 0; j < i - 1; j++) {
-
-                Node lastNode = getNode(j, first);
-                if (lastNode.next == firstNode) {
+            for (int j = 0; j < 2; j++) {
+                secondNode = secondNode.next;
+                if (secondNode == null) {
+                    endIsReached = true;
+                    break;
+                } else if (secondNode.next == firstNode || secondNode == firstNode) {
                     result = true;
+                    break;
                 }
+
             }
-            i++;
+            firstNode = firstNode.next;
         }
         return !endIsReached;
     }

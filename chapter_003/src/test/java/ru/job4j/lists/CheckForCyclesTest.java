@@ -158,10 +158,15 @@ public class CheckForCyclesTest {
 
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void whenNoElementsInListThenNoCuclesinIt() {
         CheckForCycles check = new CheckForCycles();
-        assertThat(false, is(check.hasCycleMk2(null)));
-        assertThat(false, is(check.hasCycle(null)));
+        check.hasCycle(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenNoElementsInListThenNoCuclesinItMK2() {
+        CheckForCycles check = new CheckForCycles();
+        check.hasCycleMk2(null);
     }
 }
