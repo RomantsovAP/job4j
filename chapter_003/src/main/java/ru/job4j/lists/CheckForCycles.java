@@ -60,32 +60,19 @@ public class CheckForCycles {
         if (first == null) {
             throw new IllegalArgumentException();
         }
-        boolean result          = false;
-        boolean endIsReached    = false;
-        Node firstNode  = first;
-        Node secondNode   = first;
-        while (!result) {
-            if (firstNode == null || secondNode == null) {
-                endIsReached = true;
-                break;
-            }
-            if (firstNode.next == firstNode) {
-                break; // loop
-            }
-            for (int j = 0; j < 2; j++) {
-                secondNode = secondNode.next;
-                if (secondNode == null) {
-                    endIsReached = true;
-                    break;
-                } else if (secondNode.next == firstNode || secondNode == firstNode) {
+        boolean result = false;
+
+        Node firstNode   = first;
+        Node secondNode  = first.next;
+        while (firstNode != null && secondNode != null && secondNode.next != null) {
+            firstNode   = firstNode.next;
+            secondNode  = secondNode.next.next;
+            if (secondNode == firstNode) {
                     result = true;
                     break;
                 }
-
-            }
-            firstNode = firstNode.next;
-        }
-        return !endIsReached;
+         }
+        return result;
     }
 
     public static void main(String[] args) {
