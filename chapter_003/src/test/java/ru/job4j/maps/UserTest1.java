@@ -4,6 +4,9 @@ import org.junit.Test;
 
 import java.util.*;
 
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+
 
 public class UserTest1 {
 
@@ -21,6 +24,8 @@ public class UserTest1 {
         for (Map.Entry<User, String> entry : userMap.entrySet()) {
             System.out.println(entry.getKey().toString() + " --  " + entry.getValue());
         }
+
+        assertThat(userMap.get(user1), is("Biography if user2"));
 
     }
 }
