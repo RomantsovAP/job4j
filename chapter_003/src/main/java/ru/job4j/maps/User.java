@@ -1,6 +1,7 @@
 package ru.job4j.maps;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 /**
  * Пользователь, сотрудник
@@ -27,5 +28,11 @@ public class User {
     @Override
     public String toString() {
         return "User{" + "name='" + name + '\'' + ", birthday=" + birthday.getTime().toString() + '}';
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(name, children, birthday);
     }
 }

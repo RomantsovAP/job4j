@@ -12,7 +12,9 @@ public class UserTest1 {
         Map<User, String> userMap = new HashMap<>();
 
         User user1 = new User("Иванов Иван Иванович", 1, new GregorianCalendar(1972, 7, 17));
+        System.out.println(user1.hashCode());
         User user2 = new User("Иванов Иван Иванович", 1, new GregorianCalendar(1972, 7, 17));
+        System.out.println(user2.hashCode());
         userMap.put(user1, "Biography of user1");
         userMap.put(user2, "Biography if user2");
 
