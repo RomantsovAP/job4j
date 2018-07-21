@@ -26,6 +26,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "name='" + name + '\'' + ", birthday=" + birthday + '}';
+        return "User{" + "name='" + name + '\'' + ", birthday=" + birthday.getTime().toString() + '}';
     }
 }
