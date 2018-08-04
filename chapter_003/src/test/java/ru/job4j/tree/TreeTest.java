@@ -54,7 +54,7 @@ public class TreeTest {
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void whenItearateAfterTheEndExceptionOccurs() {
+    public void whenItearateAfterTheEndThenExceptionOccurs() {
         Tree<Integer> tree = new Tree<>(1);
         tree.add(1, 2);
         Iterator<Integer> it = tree.iterator();
@@ -62,4 +62,23 @@ public class TreeTest {
         it.next();
         it.next();
     }
+
+    @Test
+    public void whenBinaryTreeThenIsBinaryReturnTrue() {
+        Tree<Integer> tree = new Tree<>(1);
+        tree.add(1, 2);
+        assertThat(tree.isBinary(), is(true));
+    }
+
+    @Test
+    public void whenNotBinaryTreeThenIsBinaryReturnFalse() {
+        Tree<Integer> tree = new Tree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(1, 4);
+        tree.add(4, 5);
+        tree.add(5, 6);
+        assertThat(tree.isBinary(), is(false));
+    }
+
 }
