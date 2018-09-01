@@ -53,7 +53,7 @@ class Store {
         }
     }
 
-    HashMap<Type, Integer> diff(List<User> prev, List<User> curr) {
+    HashMap<Type, Integer> diffOld(List<User> prev, List<User> curr) {
         HashMap<Type, Integer> result = new HashMap<>();
         prev.sort(null);
         curr.sort(null);
@@ -103,4 +103,24 @@ class Store {
         return result;
     }
 
+    HashMap<Type, Integer> diff(List<User> prev, List<User> curr) {
+        HashMap<Type, Integer> result = new HashMap<>();
+        HashMap<Integer, User> currUsers = new HashMap<>();
+        for (User currUser: curr) {
+            currUsers.put(currUser.id, currUser);
+        }
+        for (User prevUser: prev) {
+            User currUser = currUsers.get(prevUser.id);
+            if (currUser == null) {
+                addStatistic(result, Type.Deleted);
+            } else if (!currUser.equals(prevUser)) {
+                addStatistic(result, Type.Edited);
+            }
+            currUsers.remove(prevUser.id);
+        }
+        for (User currUser : currUsers.values()) {
+            addStatistic(result, Type.Added);
+        }
+        return result;
+    }
 }
