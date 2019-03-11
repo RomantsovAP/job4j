@@ -25,7 +25,7 @@ public class CheckByteStream {
         out.flush();
     }
 
-    void dropAbuses_mk2(InputStream in, OutputStream out, final String[] abuse) throws IOException {
+    void dropAbusesMk2(InputStream in, OutputStream out, final String[] abuse) throws IOException {
         Scanner scanner = new Scanner(in);
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
@@ -40,7 +40,7 @@ public class CheckByteStream {
         out.flush();
     }
 
-    void dropAbuses_mk3(final InputStream in, final OutputStream out, final String[] abuse) throws IOException {
+    void dropAbusesMk3(final InputStream in, final OutputStream out, final String[] abuse) throws IOException {
         try (final PrintStream writer = new PrintStream(out);
              final BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
             reader.lines()
