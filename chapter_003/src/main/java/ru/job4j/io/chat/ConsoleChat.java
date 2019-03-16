@@ -53,7 +53,7 @@ public class ConsoleChat {
                     System.out.println(botReply);
                     log.log(botReply);
                 }
-            } while (!userInput.equals("закончить"));
+            } while (FINISH.equals(userInput));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
