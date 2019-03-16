@@ -1,5 +1,7 @@
 package ru.job4j.io.zip;
 
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -21,6 +23,7 @@ import java.util.zip.ZipOutputStream;
 public class Pack {
 
     private final Args args;
+    private final static Logger logger = Logger.getLogger(Pack.class);
 
     private Pack(Args args) {
          this.args = args;
@@ -37,9 +40,9 @@ public class Pack {
             Pack archiver = new Pack(new ConsoleArgs(args));
             archiver.createZip(archiver.args.directory());
         } catch (IllegalArgumentException e) {
-            System.out.println("try with correct arguments");
+            logger.error("try with correct arguments",e);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(),e);
         }
     }
 
