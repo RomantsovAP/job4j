@@ -23,7 +23,7 @@ import java.util.zip.ZipOutputStream;
 public class Pack {
 
     private final Args args;
-    private final static Logger logger = Logger.getLogger(Pack.class);
+    private final static Logger LOGGER = Logger.getLogger(Pack.class);
 
     private Pack(Args args) {
          this.args = args;
@@ -40,9 +40,9 @@ public class Pack {
             Pack archiver = new Pack(new ConsoleArgs(args));
             archiver.createZip(archiver.args.directory());
         } catch (IllegalArgumentException e) {
-            logger.error("try with correct arguments",e);
+            LOGGER.error("try with correct arguments", e);
         } catch (IOException e) {
-            logger.error(e.getMessage(),e);
+            LOGGER.error(e.getMessage(), e);
         }
     }
 

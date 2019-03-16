@@ -14,16 +14,19 @@ import java.nio.file.Paths;
  */
 public class ConsoleChat {
 
-    private static final String FILE_PHRASES = "C:\\tt\\123.txt";
-    private static final String FILE_LOG = "C:\\tt\\log.txt";
+    private static final String STOP = "стоп";
+    private static final String CONTINUE = "продолжить";
+    private static final String FINISH = "закончить";
+
     private Bot bot;
     private Log log;
 
     public static void main(String[] args) {
-        try {
-            ConsoleChat chat = new ConsoleChat(
-                    new FileBot(new File(FILE_PHRASES)),
-                    new FileLog(Paths.get(FILE_LOG)));
+        if (args.length != 2) {
+            throw new IllegalArgumentException("You should specify 2 parameters^ 1-chatBot phrases file, 2- log-file");
+        }
+        try (Log log = new FileLog(Paths.get(args[1]))) {
+            ConsoleChat chat = new ConsoleChat(new FileBot(new File(args[0])), log);
             chat.start();
         } catch (IOException e) {
             e.printStackTrace();
@@ -39,14 +42,13 @@ public class ConsoleChat {
         String userInput;
         System.out.println("chat:");
         try (BufferedReader bufReader = new BufferedReader(new InputStreamReader(System.in))) {
-            //Inner assignments should be avoided.
             do {
                 userInput = bufReader.readLine();
-                if (userInput.equals("стоп") || userInput.equals("продолжить")) {
+                if (STOP.equals(userInput) || CONTINUE.equals(userInput)) {
                     bot.toggle();
                 }
                 log.log(userInput);
-                if (bot.isActive() && !"закончить".equals(userInput)) {
+                if (bot.isActive() && !FINISH.equals(userInput)) {
                     String botReply = bot.reply();
                     System.out.println(botReply);
                     log.log(botReply);
@@ -56,7 +58,6 @@ public class ConsoleChat {
             e.printStackTrace();
         } finally {
             bot.release();
-            log.close();
         }
     }
 
