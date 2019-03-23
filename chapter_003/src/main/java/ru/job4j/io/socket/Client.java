@@ -8,7 +8,7 @@ import java.net.*;
 
 public class Client implements AutoCloseable {
     private static final String GOOD_BYE = "пока";
-    private Socket socket;
+    private final Socket socket;
 
     public Client(Socket socket) {
         this.socket = socket;

@@ -9,7 +9,7 @@ import java.net.*;
 public class Server implements AutoCloseable {
     private static final String HELLO = "Hello oracle";
     private static final String GOOD_BYE = "пока";
-    private Socket socket;
+    private final Socket socket;
 
     public Server(Socket socket) {
         this.socket = socket;
