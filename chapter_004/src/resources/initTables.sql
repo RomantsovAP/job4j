@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS items (
+id serial PRIMARY KEY,
+name VARCHAR(255),
+desk VARCHAR(255)
+)

@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.Objects;
+
 /**
  * Пункт меню
  * @author AlekseyRomantsov
@@ -38,8 +40,29 @@ public class Item {
     public Item() {
     }
 
+    public String getDesk() {
+        return desk;
+    }
+
     @Override
     public String toString() {
         return "Item{" +  "id='" + id + '\'' + ", name='" + name + '\'' + ", desk='" + desk + '\'' + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Item item = (Item) o;
+        return Objects.equals(id, item.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

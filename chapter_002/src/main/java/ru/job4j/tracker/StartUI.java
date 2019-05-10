@@ -13,7 +13,7 @@ public class StartUI {
     /**
      * Хранилище заявок.
      */
-    private final Tracker tracker;
+    private final ITracker tracker;
 
     /**
      * Конструтор инициализирующий поля.

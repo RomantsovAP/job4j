@@ -8,7 +8,7 @@ import java.util.*;
  * @version 1.0.0.0
  * @since 16.05.2018
   */
-public class Tracker {
+public class Tracker implements ITracker {
 
     public static final Item NULL_ITEM = new Item();
     private static final Random RND = new Random();
