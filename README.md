@@ -4,4 +4,3 @@
 
 [![codecov](https://codecov.io/gh/RomantsovAP/job4j/branch/master/graph/badge.svg)](https://codecov.io/gh/RomantsovAP/job4j)
 
-Я прохожу обучение по курсу job4j.
